@@ -109,7 +109,8 @@ function App() {
             <Box
             lastResult={lastResult}/>
             <div className="buttons-column">
-              <button onClick={handleOpenBox} > Pet a random cat!</button>
+              <button onClick={handleOpenBox} > {results.length===0 ?
+                                                    "Pet a random cat!" : "Pet another random cat "}</button>
               <button onClick={resetResults}> Reset to a new universe</button>
               <div className="slider-container">
                 <label>Corail's probability to be petted: {Math.round(probCorail*100)}% </label>
