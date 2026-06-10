@@ -43,22 +43,32 @@ function Stats({results}) {
   )
 }
 
-function ConvergenceGraph({ data }) {
+function ConvergenceGraph({ data, probCorail }) {
   return (
     <div className="graph-container">
 
-      {/* equilibrium line */}
-      <div className="equilibrium-line" />
+      <h3 className="graph-title">
+        Convergence of Corail over time
+      </h3>
 
-      <div className="graph">
-        {data.map((value, i) => (
-          <div
-            key={i}
-            className="bar"
-            style={{ height: `${value}%` }}
-            title={`${value.toFixed(1)}%`}
-          />
-        ))}
+      <div className="graph-area">
+
+        <div
+          className="equilibrium-line"
+          style={{ top: `${(1 - probCorail) * 100}%` }}
+        />
+
+        <div className="graph">
+          {data.map((value, i) => (
+            <div
+              key={i}
+              className="bar"
+              style={{ height: `${value}%` }}
+              title={`${value.toFixed(1)}%`}
+            />
+          ))}
+        </div>
+
       </div>
 
     </div>
@@ -68,15 +78,18 @@ function ConvergenceGraph({ data }) {
 function App() {
   const [results, setResults] = useState([])
   const lastResult = results[results.length - 1]; 
+  const [probCorail, setProbCorail] = useState(0.5)
 
   function handleOpenBox() {
-    const outcome = Math.random()<0.5? "cat1" : "cat2"
+    const outcome = Math.random()<probCorail? "cat1" : "cat2"
     setResults(prev => [... prev, outcome]);
 }
 
+
   const resetResults = () => {
-    setResults([])
-  }
+  setResults([]);
+  setProbCorail(0.5);
+};
 
   const convergenceData = results.map((_, index) => {
   const slice = results.slice(0, index + 1);
@@ -99,11 +112,23 @@ function App() {
             <div className="buttons-column">
               <button onClick={handleOpenBox} > Pet a random cat!</button>
               <button onClick={resetResults}> Reset to a new universe</button>
+              <div className="slider-container">
+                <label>Corail's probability to be petted: {Math.round(probCorail*100)}% </label>
+                <input
+                type = "range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={probCorail}
+                onChange={(e)=> setProbCorail(parseFloat(e.target.value))}
+                />
+              </div>
             </div>
             <Stats results={results} />
           </div>
           <div className = "bottom-row">
-            <ConvergenceGraph data={convergenceData}/>
+            <ConvergenceGraph data={convergenceData}
+            probCorail={probCorail}/>
           </div>
       </main>
     </div>

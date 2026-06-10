@@ -1,6 +1,7 @@
 .App {
   background-color: #7d8087;
   text-align: center;
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -72,12 +73,11 @@
 }
 
 .graph {
-  background-color:white;
-  border: 2px solid #282c34;
+  height: 100%;
   display: flex;
   align-items: flex-end;
-  height: 200px;
   gap: 2px;
+  background: white;
 }
 
 .bar {
@@ -115,16 +115,49 @@
   position: relative;
   width: 80vw;
   max-width: 800px;
-  height: 200px;
+
+  height: 260px;   /* was 200px */
+  padding-top: 10px;
 }
 
 .equilibrium-line {
   position: absolute;
-  top: 50%;
   left: 0;
   right: 0;
 
-  border-top: 2px dashed #ffcc00;
+  border-top: 2px dashed #f305f3;
 
   pointer-events: none;
+}
+
+.graph-area {
+  position: relative;
+  height: 200px;
+  width: 100%;
+}
+
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+
+  color: white;
+  font-size: 12px;
+}
+
+input[type="range"] {
+  width: 120px;
+}
+.graph-title{
+  margin: 0 auto 10px auto;
+  background: white;
+  border: 2px solid #282c34;
+  border-radius: 12px;
+  width: 350px;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 10px;
+  font-size: 16px;
 }
