@@ -5,7 +5,6 @@ import cat1Img from './assets/cat1.png'
 import cat2Img from './assets/cat2.png'
 
 
-
 function Box({ lastResult }) {
   if (!lastResult) {
     return <div className="box">🐾 No cat yet</div>;
@@ -46,15 +45,22 @@ function Stats({results}) {
 
 function ConvergenceGraph({ data }) {
   return (
-    <div className="graph">
-      {data.map((value, i) => (
-        <div
-          key={i}
-          className="bar"
-          style={{ height: `${value}%` }}
-          title={`${value.toFixed(1)}%`}
-        />
-      ))}
+    <div className="graph-container">
+
+      {/* equilibrium line */}
+      <div className="equilibrium-line" />
+
+      <div className="graph">
+        {data.map((value, i) => (
+          <div
+            key={i}
+            className="bar"
+            style={{ height: `${value}%` }}
+            title={`${value.toFixed(1)}%`}
+          />
+        ))}
+      </div>
+
     </div>
   );
 }
