@@ -1,25 +1,42 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+
+
+
+
 
 function App() {
+  const [result, setResult] = useState(null)
+
+
+  function handleOpenBox() {
+    const outcome = Math.random()<0.5? "alive" : "dead"
+    setResult(outcome);
+}
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Schrödinger's cat</h1>
+        <h2>Is it dead or alive?</h2> 
+
+        <div>Here is a picture of the box</div>
+
+        <button onClick={handleOpenBox}> Open the box!</button>
+
+        <p> {result}</p>
       </header>
     </div>
   );
 }
 
+
+
+
+// Title
+// state display
+// button to open the box
+
+// Js function Math.random()
 export default App;
