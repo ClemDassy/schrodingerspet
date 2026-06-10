@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
+import cat1Img from './assets/cat1.png'
+import cat2Img from './assets/cat2.png'
 
 
 
@@ -10,10 +12,8 @@ function ResultDisplay(props) {
   if (results.length === 0) {
     return <p>Superposition</p>;
   }
-
   const cat1Count = results.filter(r => r === "cat1").length;
   const cat2Count = results.filter(r => r === "cat2").length;
-
   const total = results.length
   const cat1Pct = total ? (cat1Count/total)* 100 : 0
   const cat2Pct = total ? (cat2Count/total) *100 : 0
@@ -26,18 +26,27 @@ function ResultDisplay(props) {
       {cat1Pct}% of pets were on cat1
     </p>
   );
-
-
-
 }
 
-  function Box() {
-    return <div> The BOOOOOX</div>
+function Box({ lastResult }) {
+  if (!lastResult) {
+    return <div className="box">🐾 No cat yet</div>;
   }
+
+  return (
+    <div className="box">
+      <img
+      src={lastResult === "cat1" ? cat1Img : cat2Img}
+      alt = "cat"
+      className = "cat-img"
+      style={{height:200}}/>
+    </div>
+  );
+}
 
 function App() {
   const [results, setResults] = useState([])
-
+  const lastResult = results[results.length - 1]; 
 
   function handleOpenBox() {
     const outcome = Math.random()<0.5? "cat1" : "cat2"
@@ -57,7 +66,8 @@ function App() {
         Instead, you are going to push a button that pets one of two cats randomly.</h3> 
         </header>
         <main>
-        <Box/>
+        <Box
+        lastResult={lastResult}/>
 
         <button
         onClick={handleOpenBox}
