@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 import cat1Img from './assets/cat1.png'
@@ -82,7 +81,7 @@ function App() {
 
   function handleOpenBox() {
     const outcome = Math.random()<probCorail? "cat1" : "cat2"
-    setResults(prev => [... prev, outcome]);
+    setResults(prev => [...prev, outcome]);
 }
 
 
