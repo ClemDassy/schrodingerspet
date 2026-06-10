@@ -86,15 +86,19 @@ function App() {
         <h3>Schrödinger's cat keeps dying, which is quite sad. <br />
         Instead, you are going to push a button that pets one of two cats randomly.</h3> 
         </header>
-        <main>
-        <Box
-        lastResult={lastResult}/>
-        <button onClick={handleOpenBox} > Pet a random cat!</button>
-        <Stats results={results} />
-        
-        <ConvergenceGraph data={convergenceData}/>
-
-        <button onClick={resetResults}> Reset to a new universe</button>
+        <main className = "layout">
+          <div className= "top-row">
+            <Box
+            lastResult={lastResult}/>
+            <div className="buttons-column">
+              <button onClick={handleOpenBox} > Pet a random cat!</button>
+              <button onClick={resetResults}> Reset to a new universe</button>
+            </div>
+            <Stats results={results} />
+          </div>
+          <div className = "bottom-row">
+            <ConvergenceGraph data={convergenceData}/>
+          </div>
       </main>
     </div>
   );

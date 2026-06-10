@@ -78,11 +78,35 @@
   align-items: flex-end;
   height: 200px;
   gap: 2px;
-  margin-left:20px;
-  margin-right:20px;
 }
 
 .bar {
   width: 4px;
   background: #61dafb;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.top-row {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap: 40px;
+}
+
+.bottom-row {
+  width: 800px;
+  justify-content: center;
+}
+
+.buttons-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
 }
