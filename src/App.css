@@ -1,4 +1,5 @@
 .App {
+  background-color: #7d8087;
   text-align: center;
 }
 
@@ -39,11 +40,49 @@
 
 .box{
   height: 200px;
-  width: 200px;
+  width: 350px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 2px solid #282c34;
   border-radius: 12px;
+  background-color:white;
   margin: 20px auto;
+}
+
+.stats{
+  height: auto;
+  width: 250px;
+  padding: 15px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #282c34;
+  border-radius: 12px;
+  background-color:white;
+  margin: 20px auto;
+}
+
+.stats h3 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.cat-img {
+  height: 200px;
+}
+
+.graph {
+  background-color:white;
+  border: 2px solid #282c34;
+  display: flex;
+  align-items: flex-end;
+  height: 200px;
+  gap: 2px;
+  margin-left:20px;
+  margin-right:20px;
+}
+
+.bar {
+  width: 4px;
+  background: #61dafb;
 }

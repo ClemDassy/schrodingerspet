@@ -6,40 +6,55 @@ import cat2Img from './assets/cat2.png'
 
 
 
-function ResultDisplay(props) {
-  const results = props.results;
-
-  if (results.length === 0) {
-    return <p>Superposition</p>;
-  }
-  const cat1Count = results.filter(r => r === "cat1").length;
-  const cat2Count = results.filter(r => r === "cat2").length;
-  const total = results.length
-  const cat1Pct = total ? (cat1Count/total)* 100 : 0
-  const cat2Pct = total ? (cat2Count/total) *100 : 0
-
-  return (
-    <p>
-      cat2 = {cat2Count} and cat1 = {cat1Count} <br />
-    
-      as you click, this should go towards 50 percent:  <br />
-      {cat1Pct}% of pets were on cat1
-    </p>
-  );
-}
-
 function Box({ lastResult }) {
   if (!lastResult) {
     return <div className="box">🐾 No cat yet</div>;
   }
-
+  
+  const catJustPet = lastResult ==="cat1" ? "Corail": "Rhubarbe"
   return (
     <div className="box">
       <img
       src={lastResult === "cat1" ? cat1Img : cat2Img}
       alt = "cat"
-      className = "cat-img"
-      style={{height:200}}/>
+      className = "cat-img"/>
+      <br />
+      <p>Congratulations! You just petted {catJustPet}!</p>
+    </div>
+  );
+}
+
+function Stats({results}) {
+  const cat1Count = results.filter(r => r === "cat1").length;
+  const cat2Count = results.filter(r => r === "cat2").length;
+  const total = results.length
+  const cat1Pct = total ? (cat1Count/total)* 100 : 0
+  const cat2Pct = total ? (cat2Count/total) *100 : 0
+  
+  return (
+    <div className= "stats">
+      <h3>Experiment Statistics </h3>
+
+      <p>Total pets: {total}</p>
+
+      <p>Corail: {cat1Count} ({cat1Pct.toFixed(1)}%)</p>
+
+      <p> Rhubarbe: {cat2Count} ({cat2Pct.toFixed(1)}%)</p>
+      </div>
+  )
+}
+
+function ConvergenceGraph({ data }) {
+  return (
+    <div className="graph">
+      {data.map((value, i) => (
+        <div
+          key={i}
+          className="bar"
+          style={{ height: `${value}%` }}
+          title={`${value.toFixed(1)}%`}
+        />
+      ))}
     </div>
   );
 }
@@ -57,6 +72,12 @@ function App() {
     setResults([])
   }
 
+  const convergenceData = results.map((_, index) => {
+  const slice = results.slice(0, index + 1);
+  const cat1Count = slice.filter(r => r === "cat1").length;
+  return (cat1Count / slice.length) * 100;
+});
+
   
   return (
     <div className="App">
@@ -68,14 +89,10 @@ function App() {
         <main>
         <Box
         lastResult={lastResult}/>
-
-        <button
-        onClick={handleOpenBox}
-        //disabled={results !== null}
-        > 
-        Open the box!</button>
-
-        <ResultDisplay results ={results} />
+        <button onClick={handleOpenBox} > Pet a random cat!</button>
+        <Stats results={results} />
+        
+        <ConvergenceGraph data={convergenceData}/>
 
         <button onClick={resetResults}> Reset to a new universe</button>
       </main>
@@ -84,11 +101,6 @@ function App() {
 }
 
 
-
-
-// Title
-// state display
-// button to open the box
 
 // Js function Math.random()
 export default App;
