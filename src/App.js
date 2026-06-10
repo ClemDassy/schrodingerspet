@@ -5,50 +5,69 @@ import { useState } from 'react';
 
 
 function ResultDisplay(props) {
-  if (props.result ==null) {
-    return <p> Superposition</p>;
+  const results = props.results;
+
+  if (results.length === 0) {
+    return <p>Superposition</p>;
   }
-  else {
-    return <p>{props.result}</p>;
-  }
-  }
+
+  const cat1Count = results.filter(r => r === "cat1").length;
+  const cat2Count = results.filter(r => r === "cat2").length;
+
+  const total = results.length
+  const cat1Pct = total ? (cat1Count/total)* 100 : 0
+  const cat2Pct = total ? (cat2Count/total) *100 : 0
+
+  return (
+    <p>
+      cat2 = {cat2Count} and cat1 = {cat1Count} <br />
+    
+      as you click, this should go towards 50 percent:  <br />
+      {cat1Pct}% of pets were on cat1
+    </p>
+  );
+
+
+
+}
 
   function Box() {
     return <div> The BOOOOOX</div>
   }
 
 function App() {
-  const [result, setResult] = useState(null)
+  const [results, setResults] = useState([])
 
 
   function handleOpenBox() {
-    const outcome = Math.random()<0.5? "alive" : "dead"
-    setResult(outcome);
+    const outcome = Math.random()<0.5? "cat1" : "cat2"
+    setResults(prev => [... prev, outcome]);
 }
 
-  
-
-  const resetResult = () => {
-    setResult(null)
+  const resetResults = () => {
+    setResults([])
   }
 
+  
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Schrödinger's cat</h1>
-        <h3>Is it dead or alive?</h3> 
+        <h1>Schrödinger's cat petting experiment</h1>
+        <h3>Schrödinger's cat keeps dying, which is quite sad. <br />
+        Instead, you are going to push a button that pets one of two cats randomly.</h3> 
         </header>
         <main>
         <Box/>
 
         <button
         onClick={handleOpenBox}
-        disabled={result !== null}> 
+        //disabled={results !== null}
+        > 
         Open the box!</button>
 
-        <ResultDisplay result ={result} />
+        <ResultDisplay results ={results} />
 
-        <button onClick={resetResult}> Reset result</button>
+        <button onClick={resetResults}> Reset to a new universe</button>
       </main>
     </div>
   );
