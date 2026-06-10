@@ -2,7 +2,9 @@
 
 Tired of opening a box to see if Schrödinger's cat is dead or alive? Wait no more!
 With this React simulation, you explore the probability and convergence of petting
-one of two very cute cats.
+one of two very cute cats. 
+
+Not optimised for mobile!
 
 ## Features
 
