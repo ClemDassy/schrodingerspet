@@ -1,65 +1,92 @@
+/* GLOBAL STUFF */
+
 .App {
   background-color: #7d8087;
   text-align: center;
   min-height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: #282c34;
-  min-height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 5px 10px;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.App-header h1,
+.App-header h3 {
+  margin: 10px 10px;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* DESKTOP STUFF */
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "catbox buttons-column stats"
+    "catbox bottom-row bottom-row";
+  gap: 20px;
+  padding: 30px;
+  align-items: start;
 }
 
-.box{
-  height: 200px;
-  width: 350px;
+/* Grid areas */
+.catbox {
+  grid-area: catbox;
+}
+
+.buttons-column {
+  grid-area: buttons-column;
   display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px;
   align-items: center;
-  justify-content: center;
-  border: 2px solid #282c34;
-  border-radius: 12px;
-  background-color:white;
   margin: 20px auto;
 }
 
-.stats{
-  height: auto;
-  width: 250px;
-  padding: 15px;
+.bottom-row {
+  grid-area: bottom-row;
+}
+
+/* BOX CAT */
+
+.box {
+  height: 450px;
+  width: 450px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   border: 2px solid #282c34;
   border-radius: 12px;
-  background-color:white;
+  background-color: white;
+  margin: 20px auto;
+}
+
+.cat-img {
+  height: 350px;
+}
+
+/* STATS PANEL */
+
+.stats {
+  grid-area: stats;
+  height: auto;
+  width: 250px;
+  padding: 15px;
+  border: 2px solid #282c34;
+  border-radius: 12px;
+  background-color: white;
   margin: 20px auto;
 }
 
@@ -68,8 +95,21 @@
   text-align: center;
 }
 
-.cat-img {
+/* GRAPH */
+
+.graph-container {
+  position: relative;
+  width: 80vw;
+  max-width: 800px;
+  height: 260px;
+  padding-top: 10px;
+  margin: 0 auto;
+}
+
+.graph-area {
+  position: relative;
   height: 200px;
+  width: 100%;
 }
 
 .graph {
@@ -85,63 +125,33 @@
   background: #61dafb;
 }
 
-.layout {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
-}
-
-.top-row {
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap: 40px;
-}
-
-.bottom-row {
-  width: 800px;
-  justify-content: center;
-}
-
-.buttons-column {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-}
-
-.graph-container {
-  position: relative;
-  width: 80vw;
-  max-width: 800px;
-
-  height: 260px;   /* was 200px */
-  padding-top: 10px;
-}
-
 .equilibrium-line {
   position: absolute;
   left: 0;
   right: 0;
-
   border-top: 2px dashed #f305f3;
-
   pointer-events: none;
 }
 
-.graph-area {
-  position: relative;
-  height: 200px;
-  width: 100%;
+.graph-title {
+  margin: 0 auto 10px auto;
+  background: white;
+  border: 2px solid #282c34;
+  border-radius: 12px;
+  width: 350px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
 }
+
+/* SLIDER */
 
 .slider-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
-
   color: white;
   font-size: 12px;
 }
@@ -149,15 +159,72 @@
 input[type="range"] {
   width: 120px;
 }
-.graph-title{
-  margin: 0 auto 10px auto;
-  background: white;
-  border: 2px solid #282c34;
-  border-radius: 12px;
-  width: 350px;
+
+/*  MOBILE (<= 768px)*/
+
+@media (max-width: 768px) {
+   .App-header h1 {
+    font-size: 20px;
+  }
+   .App-header h3 {
+    font-size: 15px;
+  }
+  .layout {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "catbox buttons-column"
+      "stats stats"
+      "bottom-row bottom-row";
+    gap: 10px;
+  }
+
+.box p {
+  height: 40px;          /* reserves space even before text appears */
+  margin: 0;
+  font-size: 14px;
   text-align: center;
-  justify-content: center;
+}
+
+.box {
+  width: 100%;
+  max-width: 180px;
+  height: 220px;
+
   display: flex;
-  margin-bottom: 10px;
-  font-size: 16px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+}
+  .cat-img {
+    height: 120px;
+  }
+
+  .stats {
+    width: 90%;
+  }
+
+  .graph-title {
+    width: 90%;
+  }
+
+  input[type="range"] {
+    width: 100px;
+  }
+}
+
+/* =========================
+   SMALL MOBILE (optional tweak)
+========================= */
+
+@media (max-width: 480px) {
+
+  .cat-img {
+    height: 120px;
+  }
+
+  .graph-title {
+    font-size: 14px;
+  }
 }
